@@ -37,7 +37,7 @@ var dbo;
 //creating a database, dbo, and connecting to that database
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
-  dbo = db.db("ManishBasicDatabase");
+  dbo = db.db(process.env.MONGODB_DATABASE);
 
   //creating a collection where the book data will be stored
   dbo.createCollection("books", function(err, res) {
@@ -83,7 +83,7 @@ app.get("/", function (req, res) {
 app.get("/purchase", function(req, res) {
 	MongoClient.connect(url, function(err1, db) {
 	  if (err1) throw err1;
-	  var dbo = db.db("QuarterProjectDatabase");
+	  var dbo = db.db(process.env.MONGODB_DATABASE);
 	  dbo.collection("books").find({}).toArray(function(err2, result1) {
       if (err2) throw err2;	
       dbo.collection("cart").count(function(err3, result2) {
@@ -147,7 +147,7 @@ app.post('/query', (req, res) => {
 	console.log(req.body);
 	MongoClient.connect(url, function(err1, db) {
 	  if (err1) throw err1;
-	  var dbo = db.db("QuarterProjectDatabase");
+	  var dbo = db.db(process.env.MONGODB_DATABASE);
 	  dbo.collection("books").find(req.body).toArray(function(err, result1) {
 		if (err) throw err;
 		  dbo.collection("cart").count(function(err3, result2) {
