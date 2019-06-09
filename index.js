@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 
 //prerequisites
 var MongoClient = require('mongodb').MongoClient;
-var url = process.env.MONGOURL;
+var url = process.env.MONGODB_URI;
 
 //for the css
 app.use(express.static(__dirname + '/public'));
@@ -271,4 +271,4 @@ app.get('/success', (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT);
-console.log('Live at' + PORT);
+console.log('Live at ' + PORT);
